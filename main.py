@@ -1,5 +1,6 @@
 import sqlite3
 import datetime
+import csv
 
 import requests
 import click
@@ -74,9 +75,23 @@ def show_coin_price(coin_id, currency):
     print(f"The price of {coin_id} is {coin_price:.2f} {currency.upper()}")
 
 
+@click.command()
+@click.option("--csv_file")
+def import_investments(csv_file):
+    with open(csv_file, "r") as f:
+        rdr = csv.reader(f, delimiter=",")
+        rows = list(rdr)
+        sql = "INSERT INTO investments VALUES (?, ?, ?, ?, ?);"
+        cursor.executemany(sql, rows)
+        database.commit()
+
+        print(f"Imported {len(rows)} investments from {csv_file}")
+
+
 cli.add_command(show_coin_price)
 cli.add_command(add_investment)
 cli.add_command(get_investment_value)
+cli.add_command(import_investments)
 
 
 if __name__ == "__main__":
