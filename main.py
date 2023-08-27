@@ -5,7 +5,6 @@ import csv
 import requests
 import click
 
-
 CREATE_INVESTMENTS_SQL = """
 CREATE TABLE IF NOT EXISTS investments (
     coin_id TEXT,
@@ -30,8 +29,16 @@ def cli():
 
 
 @click.command()
-@click.option("--coin_id")
-@click.option("--currency")
+@click.option("--coin_id", default="bitcoin")
+@click.option("--currency", default="usd")
+def show_coin_price(coin_id, currency):
+    coin_price = get_coin_price(coin_id, currency)
+    print(f"The price of {coin_id} is {coin_price:.2f} {currency.upper()}")
+
+
+@click.command()
+@click.option("--coin_id", default="bitcoin")
+@click.option("--currency", default="usd")
 @click.option("--amount", type=float)
 @click.option("--sell", is_flag=True)
 def add_investment(coin_id, currency, amount, sell):
@@ -65,14 +72,6 @@ def get_investment_value(coin_id, currency):
 
     print(
         f"You own a total of {total} {coin_id} worth {total * coin_price} {currency.upper()}")
-
-
-@click.command()
-@click.option("--coin_id", default="bitcoin")
-@click.option("--currency", default="usd")
-def show_coin_price(coin_id, currency):
-    coin_price = get_coin_price(coin_id, currency)
-    print(f"The price of {coin_id} is {coin_price:.2f} {currency.upper()}")
 
 
 @click.command()

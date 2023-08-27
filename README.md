@@ -1,8 +1,8 @@
 # SQLAlch-Currencies README
 
-This app demonstrates the use of Python and the Click package to create a CLI for returning crypto currency investment info stored in a SQLite DB. The currency, date and current price data is provided with the assistance of a free but limited api from CoinGecko https://www.coingecko.com/ 
+This SQLAlch-Currencies app demonstrates the use of Python and the Click package to create a CLI for returning crypto currency investment info stored in a SQLite DB. The currency, date and current price data is provided with the assistance of a free but limited api from CoinGecko https://www.coingecko.com/ 
 
-This SQLAlch-Currencies app is based an awesome Pluralsight tutorial by Douglas Starnes who pateiently explains how the app works, line by line. https://www.pluralsight.com/
+The SQLAlch-Currencies app is based an awesome Pluralsight tutorial by Douglas Starnes who pateiently explains how the app works, line by line. https://www.pluralsight.com/
 
 Part 1 of this app (SQLAlch-Currencies) uses only SQL statements to populate an SQLite DB. 
 
@@ -11,11 +11,12 @@ In a separate, part 2 app (SQLAlch-Currencies-2) a separate SQLite DB will be po
 
 ### SQLAlch-Currencies Getting Started
 
-After cloning the SQLAlch-Currencies repo, cd to the folder, create a venv and install the requests package.
+After cloning the SQLAlch-Currencies repo, cd to the folder, create a venv and install the requests and click packages.
 
 $ python -m venv venv
 $ source venv/bin/activate
-(venv) $ python -m pip install requests
+(venv) $ python -m pip install requests 
+(venv) $ python -m pip install click
 
 The other imported packages are already part of the Python Standard Library
 
@@ -33,7 +34,7 @@ Request the current price of the default crypto currency: bitcoin in usd
 (venv) $ python get_price.py
 
 Request the current price of specific crypto currencies by specifying coin_id and currency
-(venv) $ python main.py --coin_id=ethereum --currency=gbp
+(venv) $ python main.py show-coin-price --coin_id=ethereum --currency=gbp
 
 Add an investment to the db, specify coin_id, currency and amount
 (venv) $ python main.py add-investment --coin_id=bitcoin --currency=usd --amount=1
